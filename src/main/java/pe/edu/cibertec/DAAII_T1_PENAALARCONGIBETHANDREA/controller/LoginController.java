@@ -52,4 +52,9 @@ public class LoginController {
         return "auth/frmlogin";
     }
 
+    @GetMapping("/cambiopassword")
+    public String cambiopassword(){
+        return "auth/frmcambioPassword";
+    }
+
 }

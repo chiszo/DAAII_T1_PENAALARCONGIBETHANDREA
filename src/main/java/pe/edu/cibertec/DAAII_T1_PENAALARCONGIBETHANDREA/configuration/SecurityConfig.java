@@ -41,8 +41,7 @@ public class SecurityConfig {
                                 .passwordParameter("password")
         ).logout(
                 logout ->
-                        logout.logoutUrl("/auth/cerrar-sesion")
-                                .logoutSuccessUrl("/auth/login")
+                        logout.logoutSuccessUrl("/auth/login")
                                 .invalidateHttpSession(true)
         ).authenticationProvider(authProvider());
         return httpSecurity.build();
