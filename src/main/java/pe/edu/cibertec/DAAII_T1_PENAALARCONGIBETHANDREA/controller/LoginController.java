@@ -2,7 +2,10 @@ package pe.edu.cibertec.DAAII_T1_PENAALARCONGIBETHANDREA.controller;
 
 
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +29,16 @@ public class LoginController {
         return "redirect:/auth/dashboard";
     }
     @GetMapping("/dashboard")
-    public String dashboard(){
+    public String dashboard(Model model){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDetails userDetails = null ;
+        if (principal instanceof UserDetails) {
+            userDetails = (UserDetails) principal;
+        }
+        @SuppressWarnings("null")
+        String userName = userDetails.getUsername();
+        model.addAttribute("nombre",userName);
+
         return "auth/home";
     }
 
